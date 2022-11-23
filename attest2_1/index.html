@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body style="margin:0px; overflow:hidden;">
+
+        <!-- A-Frame ライブラリの読み込み -->
+        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+        <!-- AR.js ライブラリの読み込み -->
+        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+        <!-- aframe-extrasの読み込み(glTFのアニメーション再生のため) -->
+        <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v5.0.0/dist/aframe-extras.min.js"></script>
+
+        <!-- A-Frame の VR空間に AR.js を紐づける（デバッグUIを非表示） -->
+        <a-scene embedded arjs="debugUIEnabled:false;" renderer="gammaOutput: true;" vr-mode-ui="enabled:false" >
+
+            <!-- オブジェクトの読み込みここから -->
+            <a-assets>
+                <a-asset-item id="model" src="./ar/cake _copy.glb"></a-asset-item>
+                <!--<a-asset-item id="model" src="./ar/P01.glb"></a-asset-item>-->
+            </a-assets>
+        
+            <!-- マーカーを登録（プリセットされている「hiro」マーカー） -->
+            <a-marker preset="custom" type="pattern" url="pattern-yellletter.patt">
+
+                <a-text
+                    value="Happy Birthday!!"
+                    font="hui-msdf.json"
+                    font-image="hui-msdf.png"
+                    negate="false"
+                    scale="2 2 1"
+                    position="-1.5 2 0"
+                    color="black">
+                <a-entity 
+                    gltf-model="#model"
+                    position="1 -1 1"
+                    scale="0.5 0.5 0.5"
+                    rotation="0 0 0"
+                    animation="property: scale;
+                        dur: 2000;
+                        to: 0.6 0.6 0.6;
+                        dir: alternate;
+                        loop: true">
+                </a-entity>
+                </a-marker>
+            <!-- AR用のカメラを置く -->
+            <a-entity camera></a-entity>
+        </a-scene>
+    </body>
+</html>
